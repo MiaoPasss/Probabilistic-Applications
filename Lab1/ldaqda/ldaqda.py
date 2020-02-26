@@ -87,8 +87,8 @@ def discrimAnalysis(x, y):
         rc = []
         for col in range(80,280):
             rc.append([row,col])
-        male[:,row - 50] = density_Gaussian(mu_male, cov, np.array(rc))
-        female[:,row -80] = density_Gaussian(mu_female, cov, np.array(rc))
+        male[:,row - 50] = util.density_Gaussian(mu_male, cov, np.array(rc))
+        female[:,row -80] = util.density_Gaussian(mu_female, cov, np.array(rc))
     beta1 = np.linalg.inv(cov) @ mu_male
     gamma1 = -(mu_male.T @ np.linalg.inv(cov) @ mu_male) / 2
     beta2 = np.linalg.inv(cov) @ mu_female
@@ -97,6 +97,7 @@ def discrimAnalysis(x, y):
     plt.contour(H, W, y_lda, 0)
     plt.contour(H, W, male, linestyles='dashed')
     plt.contour(H, W, female, linestyles='dashed')
+    plt.show()
     plt.savefig("LDA.pdf")
 
     plt.figure()
@@ -117,13 +118,14 @@ def discrimAnalysis(x, y):
         rc = []
         for col in range(80,280):
             rc.append([row,col])
-        male[:,row - 50] = density_Gaussian(mu_male, cov_male, np.array(rc))
-        female[:,row -80] = density_Gaussian(mu_female, cov_female, np.array(rc))
+        male[:,row - 50] = util.density_Gaussian(mu_male, cov_male, np.array(rc))
+        female[:,row -80] = util.density_Gaussian(mu_female, cov_female, np.array(rc))
 
     y_qda = male - female
     plt.contour(H, W, y_qda, 0)
     plt.contour(H, W, male, linestyles='dashed')
     plt.contour(H, W, female, linestyles='dashed')
+    plt.show()
     plt.savefig("QDA.pdf")
 
 

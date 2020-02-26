@@ -20,8 +20,8 @@ def learn_distributions(file_lists_by_category):
     smoothed estimates of q_d
     """
 
-    spam_words = get_word_freq(file_lists_by_category[0])
-    ham_words = get_word_freq(file_lists_by_category[1])
+    spam_words = util.get_word_freq(file_lists_by_category[0])
+    ham_words = util.get_word_freq(file_lists_by_category[1])
 
     vocab_set = set(spam_words.keys()).union(set(ham_words.keys()))
     spam_bag = sum(spam_words.values())
@@ -66,7 +66,7 @@ def classify_new_email(filename,probabilities_by_category,prior_by_category, hyp
     representing the log posterior probabilities
     """
 
-    word_bag = get_word_freq([filename])
+    word_bag = util.get_word_freq([filename])
     p_d, q_d = probabilities_by_category
     prior1 = prior_by_category[0]
     prior0 = 1 - prior1
@@ -189,4 +189,5 @@ if __name__ == '__main__':
     plt.xlabel('Type1 Error')
     plt.ylabel('Type2 Error')
     plt.grid()
+    plt.show()
     plt.savefig("nbc.pdf")
