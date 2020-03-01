@@ -1,5 +1,5 @@
-# ECE421 Winter 2020
-This repository includes all the labs in ECE421 from Winter 2020 at University of Toronto.
+# ECE368 Winter 2020
+This repository includes all the labs in ECE368 from Winter 2020 at University of Toronto.
 
 * Lab 1: Classification with Multinomial and Gaussian Models
 
