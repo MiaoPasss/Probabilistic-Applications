@@ -16,9 +16,6 @@ def priorDistribution(beta):
     mean = np.array([0, 0])
     cov = np.array([[beta, 0], [0, beta]])
 
-    print(mean.shape)
-    print(cov.shape)
-
     h = np.linspace(-1, 1, 1000)
     v = np.linspace(-1, 1, 1000)
 
@@ -34,7 +31,7 @@ def priorDistribution(beta):
     plt.grid()
     plt.title("Prior Distribution")
     plt.plot([-0.1], [-0.5], marker='o', markersize=5, color='red')
-    plt.contour(H, V, prob, color='blue')
+    plt.contour(H, V, prob)
     plt.xlabel('$a_{0}$')
     plt.ylabel('$a_{1}$')
     plt.savefig("prior.pdf")
@@ -64,9 +61,6 @@ def posteriorDistribution(x,z,beta,sigma2,ns=1):
     mu = np.linalg.inv(X.T @ X + sigma2 * np.identity(2)/beta) @ X.T @ z.reshape(N, 1)
     Cov = sigma2 * np.linalg.inv(X.T @ X + sigma2 * np.identity(2)/beta)
 
-    print(mu.shape)
-    print(Cov.shape)
-
     h = np.linspace(-1, 1, 1000)
     v = np.linspace(-1, 1, 1000)
 
@@ -82,7 +76,7 @@ def posteriorDistribution(x,z,beta,sigma2,ns=1):
     plt.grid()
     plt.title("Posterior Distribution with sample size {}".format(ns))
     plt.plot([-0.1], [-0.5], marker='o', markersize=5, color='red')
-    plt.contour(H, V, prob, color='blue')
+    plt.contour(H, V, prob)
     plt.xlabel('$a_{0}$')
     plt.ylabel('$a_{1}$')
     plt.savefig("posterior{}.pdf".format(ns))
@@ -118,9 +112,8 @@ def predictionDistribution(x,beta,sigma2,mu,Cov,x_train,z_train, ns=1):
     plt.grid()
     plt.title("Prediction with training sample size {}".format(ns))
     plt.scatter(x_train,z_train, color='red', s=10)
-    plt.legend('training samples')
     plt.errorbar(x, np.squeeze(np.array(prediction)), yerr=np.squeeze(np.array(yerr)), color='blue')
-    plt.legend('predictions')
+    plt.legend(['training samples', 'predictions'])
     plt.xlabel('x')
     plt.ylabel('y')
     plt.savefig("predict{}.pdf".format(ns))
